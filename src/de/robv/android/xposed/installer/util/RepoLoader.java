@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +69,7 @@ public class RepoLoader {
 		return mInstance;
 	}
 
-	public boolean refreshRepositories() {
+	private boolean refreshRepositories() {
 		mRepositories = RepoDb.getRepositories();
 
 		// Unlikely case (usually only during initial load): DB state doesn't fit to configuration
@@ -247,7 +246,6 @@ public class RepoLoader {
 				return;
 
 			RepoDb.deleteRepositories();
-			mRepositories = new LinkedHashMap<Long, Repository>(0);
 			DownloadsUtil.clearCache(null);
 			resetLastUpdateCheck();
 		}
